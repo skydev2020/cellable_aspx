@@ -95,14 +95,17 @@
                                         Storage Capacity
                                     </p>
                                 </div>
-                                <div style="display:inline-block; width:50px;"></div>
+                                <div style="display:inline-block; width:30px;"></div>
                                 @foreach (var capacities in ViewBag.Capacities)
                                 {
                                     foreach (var versionCapacities in ViewBag.PhoneCapacities)
                                     {
                                         if (capacities.StorageCapacityId == versionCapacities.StorageCapacityId)
                                         {
-                                            <input id="capacity" type="radio" name="capacity" value="@versionCapacities.Value" onchange="SetField('capacity', @versionCapacities.Value, '@capacities.Description')" />@capacities.Description @Html.Raw("&nbsp; &nbsp;")
+                            <label>
+                                <input id="capacity" type="radio" name="capacity" value="@versionCapacities.Value" onchange="SetField('capacity', @versionCapacities.Value, '@capacities.Description')" />@Html.Raw("&nbsp;")
+                                @capacities.Description
+                            </label>@Html.Raw("&nbsp; &nbsp;")
                                         }
                                     }
                                 }
@@ -136,8 +139,9 @@
                                         {
                                             if (group.DefectGroupId == defect.DefectGroupId)
                                             {
+                                            <label>
                                                 <input id="@defect.DefectGroupId" type="radio" name="@group.DefectGroupId" value="@defect.DefectGroupId@Html.Raw("_")@defect.PossibleDefectId@Html.Raw("_")@Html.DisplayFor(modelItem => defect.DefectCost)" onchange="SetField('@group.DefectGroupId', null, null)" /> @Html.Raw("&nbsp;") @Html.DisplayFor(modelItem => defect.DefectName)
-                                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                                            </label>@Html.Raw("&nbsp;&nbsp;&nbsp;")
                                             }
                                         }
                                         <div id="val_@group.DefectGroupId.ToString()" name="val_@group.DefectGroupId.ToString()" class="text-danger" style="margin-left:40px; display:none;">* Required</div>
