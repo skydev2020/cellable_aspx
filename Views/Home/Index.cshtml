@@ -1,0 +1,140 @@
+﻿@model IEnumerable<CellableMVC.Models.Phone>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var testimonals = ViewBag.Testimonials;
+}
+
+<div style="height:50px"></div>
+<table style="width:100%;">
+    <tr>
+        <td>
+            <table style="width:60%; margin-left:auto; margin-right:auto;">
+                <tr>
+                    <td style="text-align:center">
+                        <h2>@ViewBag.Title</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px;">
+                        @ViewBag.Text
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:100%; text-align:center" colspan="2">
+            <table style="width:70%; text-align:center; margin-left:auto; margin-right:auto;">
+                <tr>
+                    @foreach (var item in Model)
+                    {
+                        <td style="width:33%; text-align:center;">
+                            <a class="btn btn-default" href="/Phones/Carriers/@item.PhoneId" style="font-size: 50px; height: 350px; left: 58px; width: 250px; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-top: 50px; ">
+                                <img src="@ViewBag.imageLocation/@item.ImageName" style="width: 185px; height: 224px; left: 200px; margin-top: 27px; padding-top: 10px;" />
+                                <p style="font-family: 'HP Simplified'; padding-top: 50px; font-size: 25px; width: 249px; height: 70px; color: #000; text-align: center; margin-right: 50px;">@Html.DisplayFor(modelItem => item.Brand)</p>
+                            </a>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center;">
+            <table style="width:100%; margin-left:auto; margin-right:auto; margin-top:80px;">
+                <tr><td style="height:20px;"></td></tr>
+                <tr>
+                    <td>
+                        @ViewBag.Body
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:100%; text-align:center; margin-top:50px;">
+            <table style="width:60%; margin-left:auto; margin-right:auto; text-align:center;">
+                <tr>
+                    <td>
+                        <div style="margin-top:50px;"></div>
+                        <div class="slideshow-container">
+                            @foreach (var testimonial in testimonals)
+                            {
+                                <div class="mySlides">
+                                    @for (var i = 1; i <= testimonial.Rating; i++)
+                                    {
+
+                                        @Html.Raw("<span class='fa fa-star checked'></span>");
+                                    }
+                                    <i>@Html.Raw(testimonial.Text)</i>
+                                </div>
+                                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                                <a class="next" onclick="plusSlides(1)">❯</a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="width:100%; text-align:center;">
+            <table style="width:60%; margin-left:auto; margin-right:auto; text-align:center;">
+                <tr>
+                    <td>
+                        <div class="dot-container">
+                            @{
+                                var x = 1;
+                                foreach (var testimonial in testimonals)
+                                {
+                                    @Html.Raw("<span class='dot' onclick='currentSlide(" + x + ")'></span>");
+                                    x++;
+                                }
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr><td style="height:50px"></td></tr>
+</table>
+<table style="width:100%; margin-left:auto; margin-right:auto;">
+    <tr>
+        <td style="text-align:center; vertical-align:middle; height:150px;">
+            @ViewBag.Footer
+        </td>
+    </tr>
+</table>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+</script>
+
