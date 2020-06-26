@@ -219,8 +219,8 @@ namespace CellableMVC.Controllers
                     string[] defect;
                     defect = defectField.Split(delimiter, StringSplitOptions.None);
 
-                    if (defect[2] != "0" && defect[2] != "0.00")
-                    {
+                    //if (defect[2] != "0" && defect[2] != "0.00")
+                    //{
                         baseCost -= decimal.Parse(defect[2]);
                         Session[defect[1]] = defect[2];
 
@@ -228,7 +228,7 @@ namespace CellableMVC.Controllers
                         var obj = new { Question = db.DefectGroups.Find(int.Parse(defect[0])).GroupName, Answer = db.PossibleDefects.Find(int.Parse(defect[1])).DefectName };
                         Session["QuestionAnswer" + i + "_obj"] = obj;
                         i++;
-                    }
+                    //}
                 }
             }
 
