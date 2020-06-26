@@ -225,7 +225,8 @@ namespace CellableMVC.Controllers
                         Session[defect[1]] = defect[2];
 
                         Session["QuestionAnswer" + i] = defect[0] + "_" + defect[1] + "_" + defect[2];
-
+                        var obj = new { Question = db.DefectGroups.Find(int.Parse(defect[0])).GroupName, Answer = db.PossibleDefects.Find(int.Parse(defect[1])).DefectName };
+                        Session["QuestionAnswer" + i + "_obj"] = obj;
                         i++;
                     }
                 }

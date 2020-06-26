@@ -125,14 +125,35 @@
                                     @decimal.Truncate(decimal.Parse(Session["BaseValue"].ToString()))
                                 </td>
                             </tr>
-                            @*@foreach (var defect in Model)
+                            @foreach (var item in Session)
+                            {
+                                if (item.ToString().Contains("QuestionAnswer") && !item.ToString().Contains("_obj"))
+                                {
+                                    var defectObj = Session[item.ToString()+"_obj"];
+
+                                    @Html.Raw("<tr><td style='padding:3px; text-align:right;'>")
+                                    @defectObj.GetType().GetProperty("Question").GetValue(defectObj, null)
+                                    @defectObj.GetType().GetProperty("Answer").GetValue(defectObj, null)
+                                    @Html.Raw("</td></tr>")
+                                    //var defectGroup = db.DefectGroup.Find(int.Parse(groupAnswer[0]));
+                                    //userAnswer.PossibleDefectId = int.Parse(groupAnswer[1]);
+                                    //userAnswer.UserPhoneId = userPhoneId;
+                                    //userAnswer.DefectGroupId = int.Parse(groupAnswer[0].ToString());
+                                    //userAnswer.UserAnswerId = int.Parse(groupAnswer[1].ToString());
+
+                                    //db.UserAnswers.Add(userAnswer);
+                                    //db.SaveChanges();
+                                }
+                            }
+
+                            @foreach (var defect in Model)
                             {
                                 foreach (var item in Session)
                                 {
                                     var temp = 0;
                                     if (int.TryParse(item.ToString(), out temp))
                                     {
-                                        if (defect.PossibleDefectId == int.Parse(item.ToString()) && (Session[item.ToString()].ToString() != "0.00" && Session[item.ToString()].ToString() != "0"))
+                                        if (defect.PossibleDefectId == int.Parse(item.ToString()))
                                         {
                                             @Html.Raw("<tr><td style='padding:3px; text-align:right;'>")
                                             if (defect.DefectName == "No")
@@ -148,7 +169,7 @@
                                     }
 
                                 }
-                            }*@
+                            }
                             @if (Session["PromoCode"] != null)
                             {
                                 @Html.Raw("<tr>")
