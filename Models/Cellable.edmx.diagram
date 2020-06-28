@@ -44,6 +44,8 @@
         <EntityTypeShape EntityType="CellableModel.VersionCarrier" Width="1.5" PointX="11.25" PointY="2.125" />
         <AssociationConnector Association="CellableModel.FK_VersionCarrier_Carrier" />
         <AssociationConnector Association="CellableModel.FK_VersionCarrier_PhoneVersion" />
+        <EntityTypeShape EntityType="CellableModel.OrderQuestion" Width="1.5" PointX="7.5" PointY="14.75" />
+        <AssociationConnector Association="CellableModel.FK_Orders_OrderId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

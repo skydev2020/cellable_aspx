@@ -410,6 +410,18 @@ namespace CellableMVC.Controllers
                     db.Entry(phoneVersion).State = EntityState.Modified;
                     db.SaveChanges();
 
+
+                    // Create OrderQuestion and Store it to DB
+                    OrderQuestion orderQuestion = new OrderQuestion();
+
+                    orderQuestion.Question = "Sample Question";
+                    orderQuestion.Answer = "Sample Answer";
+                    orderQuestion.OrderId = orderId;
+                    
+                    db.OrderQuestions.Add(orderQuestion);
+                    db.SaveChanges();
+                    
+
                     dbContextTransaction.Commit();
 
                     // Get/Save Shipping Label

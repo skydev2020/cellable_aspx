@@ -222,6 +222,9 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>Cellable.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderQuestion.cs">
+      <DependentUpon>Cellable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderStatu.cs">
       <DependentUpon>Cellable.tt</DependentUpon>
     </Compile>

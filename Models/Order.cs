@@ -14,6 +14,12 @@ namespace CellableMVC.Models
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderQuestions = new HashSet<OrderQuestion>();
+        }
+    
         public int OrderID { get; set; }
         public decimal Amount { get; set; }
         public int UserId { get; set; }
@@ -31,5 +37,7 @@ namespace CellableMVC.Models
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual Promo Promo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderQuestion> OrderQuestions { get; set; }
     }
 }
