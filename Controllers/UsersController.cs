@@ -414,13 +414,30 @@ namespace CellableMVC.Controllers
                     // Create OrderQuestion and Store it to DB
                     OrderQuestion orderQuestion = new OrderQuestion();
 
-                    orderQuestion.Question = "Sample Question";
-                    orderQuestion.Answer = "Sample Answer";
-                    orderQuestion.OrderId = orderId;
+                    orderQuestion.Question = "Storage Capacity";
+                    orderQuestion.Answer = Session["CapacityDescription"].ToString();
                     
+                    orderQuestion.OrderId = orderId;
+
                     db.OrderQuestions.Add(orderQuestion);
                     db.SaveChanges();
-                    
+
+                    foreach (var item in Session)
+                    {
+                        if (item.ToString().Contains("QuestionAnswer") && !item.ToString().Contains("_obj"))
+                        {
+                            var defectObj = Session[item.ToString() + "_obj"];
+                            orderQuestion = new OrderQuestion();
+
+                            orderQuestion.Question = defectObj.GetType().GetProperty("Question").GetValue(defectObj, null).ToString();
+                            orderQuestion.Answer = defectObj.GetType().GetProperty("Answer").GetValue(defectObj, null).ToString();
+                            orderQuestion.OrderId = orderId;
+
+                            db.OrderQuestions.Add(orderQuestion);
+                            db.SaveChanges();
+
+                        }
+                    }
 
                     dbContextTransaction.Commit();
 
