@@ -347,7 +347,8 @@ namespace CellableMVC.Controllers
                     db.UserPhones.Add(userPhone);
                     db.SaveChanges();
                     var userPhoneId = userPhone.UserPhoneId;
-
+          
+                    
                     var i = 0;
                     // Save User Answers
                     foreach (var item in Session)
@@ -371,6 +372,7 @@ namespace CellableMVC.Controllers
                             db.SaveChanges();
                         }
                     }
+                   
 
                     // Create Order
                     Order order = new Order();
@@ -410,7 +412,6 @@ namespace CellableMVC.Controllers
                     db.Entry(phoneVersion).State = EntityState.Modified;
                     db.SaveChanges();
 
-
                     // Create OrderQuestion and Store it to DB
                     OrderQuestion orderQuestion = new OrderQuestion();
 
@@ -418,7 +419,7 @@ namespace CellableMVC.Controllers
                     orderQuestion.Answer = Session["CapacityDescription"].ToString();
                     
                     orderQuestion.OrderId = orderId;
-
+              
                     db.OrderQuestions.Add(orderQuestion);
                     db.SaveChanges();
 
@@ -435,7 +436,7 @@ namespace CellableMVC.Controllers
 
                             db.OrderQuestions.Add(orderQuestion);
                             db.SaveChanges();
-
+                        
                         }
                     }
 
@@ -455,10 +456,10 @@ namespace CellableMVC.Controllers
                 catch (Exception ex)
                 {
                     dbContextTransaction.Rollback();
-
+                    
                     ViewBag.Message = "An error was encountered while attempting to complete your transaction. " +
                         "If the error continues, please contact us directly.<br />" +
-                        ex.Message;
+                        ex.Message+ ex.ToString();
                     ViewBag.PaymentTypes = new SelectList(db.PaymentTypes, "PaymentTypeId", "PaymentType1", "-- How You Get Paid --");
                     ViewBag.State = new SelectList(db.States, "StateAbbrv", "StateName", "-- Select State --");
 
