@@ -97,12 +97,12 @@ namespace CellableMVC.Controllers
             if (searchString == null)
             {
                 // Get entire list of Phone Versions to pass to the view
-                phoneVersions = db.PhoneVersions.ToList().Where(x => x.Phone.PhoneId == brandId && x.Active == active).ToList();
+                phoneVersions = db.PhoneVersions.ToList().Where(x => x.Phone.PhoneId == brandId && x.Active == active).OrderByDescending(x => x.Ranking).ToList();
             }
             else
             {
                 // Get filtered Phone Versions list
-                phoneVersions = db.PhoneVersions.Where(x => x.Version.Contains(searchString)).ToList();
+                phoneVersions = db.PhoneVersions.Where(x => x.Version.Contains(searchString)).OrderByDescending(x => x.Ranking).ToList();
             }
 
             // Set the Carrier Session Variable
