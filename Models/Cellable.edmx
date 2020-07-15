@@ -93,7 +93,7 @@
           <Property Name="Views" Type="int" />
           <Property Name="Purchases" Type="int" />
           <Property Name="Active" Type="bit" />
-		  <Property Name="Ranking" Type="decimal" Precision="18" Scale="1"/>
+		  <Property Name="Ranking" Type="decimal" Precision="18" Scale="2"/>
         </EntityType>
         <EntityType Name="PossibleDefects">
           <Key>
@@ -642,7 +642,7 @@
           <Property Name="Views" Type="Int32" />
           <Property Name="Purchases" Type="Int32" />
           <Property Name="Active" Type="Boolean" />
-		  <Property Name="Ranking" Type="Decimal" Precision="18" Scale="1" />
+		  <Property Name="Ranking" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="VersionCapacities" Relationship="CellableModel.FK_VersionCapacity_PhoneVersion" FromRole="PhoneVersion" ToRole="VersionCapacity" />
           <NavigationProperty Name="VersionCarriers" Relationship="CellableModel.FK_VersionCarrier_PhoneVersion" FromRole="PhoneVersion" ToRole="VersionCarrier" />
         </EntityType>
